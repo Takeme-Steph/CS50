@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="form-group">
+            <label for="symbol">Stock Symbol:</label>
+            <select name="symbol" id="symbol">
+                {% for i in range(j) %}
+                <option value="{{portfolio[i]["symbol"]}}">{{portfolio[i]["symbol"]}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Number of Shares" type="number" value="0">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}
+
+
+<form action="/buy" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="amount" placeholder="Amount in $" type="number" value="0">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="card" placeholder="Credit/Debit Card Number" type="number" value="0">
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>

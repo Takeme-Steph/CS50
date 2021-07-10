@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    TopUp
+{% endblock %}
+
+{% block main %}
+
+    <script>
+        function v(){
+            var test = document.getElementById("tvalue").value;
+            return test
+        }
+    </script>
+
+    <form action="/quote" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="tvalue" placeholder="Value in USD" type="number" id="tvalue" oninput="v()">
+        </div>
+    </form>
+
+    <!-- the API key used is a dummy one from thier documentation,register an account and set your api key as a global variable, but this still works
+    for tests. Also i set the currency to NGN becuase the cards have a transation limt for dollars, so i can run more tests this way.-->
+    <form>
+      <script src="https://checkout.flutterwave.com/v3.js"></script>
+      <button type="button" onClick="makePayment()">Pay Now</button>
+    </form>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        function makePayment() {
+            FlutterwaveCheckout({
+              public_key:'{{key}}',
+              tx_ref: "cs101",
+              amount: v(),
+              currency: "NGN",
+              country: "NG",
+              payment_options: " ",
+              customer: {
+                email: '{{user[0]["email"]}}',
+                phone_number: "000000",
+                name: '{{user[0]["username"]}}',
+              },
+
+              callback:function (data) { // specified callback function
+
+                $.ajax({
+                    type: "POST",
+                    contentType:'application/json',
+                    url: "https://ide-aa4eafb22461487aae1a6ad345c6a23a-8080.cs50.ws/topup",
+                    data: JSON.stringify(data),
+                    });
+              },
+            });
+          }
+    </script>
+
+
+    <div>Please refer to <a href="https://developer.flutterwave.com/docs/test-cards">Rave documentation</a> for dummy cards</div>
+
+{% endblock %}

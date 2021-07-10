@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    {% if typep == "quote" %}
+        <form action="/quote" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Quote</button>
+        </form>
+    {% else %}
+        <table style="width:100%">
+          <tr>
+            <th>Symbol</th>
+            <th>Company Name</th>
+            <th>Price</th>
+          </tr>
+          <tr>
+            <td>{{results["symbol"]}}</td>
+            <td>{{results["name"]}}</td>
+            <td>{{usd(results["price"])}}</td>
+          </tr>
+        </table>
+    {% endif %}
+{% endblock %}

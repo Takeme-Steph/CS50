@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block main %}
+    <table style="width:100%">
+        <tr>
+            <th>Symbol</th>
+            <th>Company Name</th>
+            <th>Price</th>
+            <th>Transaction Type</th>
+            <th>Quantity</th>
+            <th>Value</th>
+            <th>Date</th>
+        </tr>
+        {% for i in range(j) %}
+        <tr>
+            <td>{{history[i]["symbol"]}}</td>
+            <td>{{history[i]["name"]}}</td>
+            <td>{{history[i]["price"] | usd}}</td>
+            <td>{{history[i]["type"]}}</td>
+            <td>{{history[i]["amount"]}}</td>
+            <td>{{history[i]["cost"] | usd}}</td>
+            <td>{{history[i]["date"]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+{% endblock %}
