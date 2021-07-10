@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <script>
+        //show edit form and button
+        function ShowEdit(id) {
+            document.getElementsByClassName("edit")[id].style.display="initial"
+            document.getElementsByClassName("go")[id].style.display="none"
+        };
+        </script>
+
+        <script>
+        //Hide edit form and button
+        function Cancel(id) {
+            document.getElementsByClassName("edit")[id].style.display="none"
+            document.getElementsByClassName("go")[id].style.display=""
+        };
+        </script>
+
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                 <h2>Add a Birthday</h2>
+                    <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/" method="post">
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control" name="name" placeholder="name" type="text">
+                        <input autocomplete="off" autofocus class="form-control" name="day" placeholder="day" type="number">
+                        <input autocomplete="off" autofocus class="form-control" name="month" placeholder="month" type="number">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </form>
+
+                </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Dont know how to specify what item to hide and unhide edit features for so used a variable, open to suggestions.Also new scope restrictions-->
+                        {% set count = namespace(value=0) %}
+                        {% for row in rows %}
+
+                            <tr>
+                                <td>{{row["name"]}}</td>
+                                <td>{{row["day"]}} / {{row["month"]}}</td>
+                                <td>
+                                    <form action="/delete" method="post">
+                                    <input autocomplete="off" autofocus class="form-control" name="ids" value='{{row["id"]}}' type="hidden">
+                                    <button class="btn btn-primary" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td class="edit" >
+                                        <form action="/edit" method="post">
+                                        <input autocomplete="off" autofocus class="editf"  name="name" value='{{row["name"]}}'>
+                                        <input autocomplete="off" autofocus class="editf"  name="day" value='{{row["day"]}}' >
+                                        <input autocomplete="off" autofocus class="editf"  name="month" value='{{row["month"]}}'>
+                                        <input autocomplete="off" autofocus class="form-control" name="ids" value='{{row["id"]}}' type="hidden">
+                                        <button class="editf" type="submit">Save</button>
+                                        <button type="button"  onclick="Cancel({{count.value}})">Cancel</button>
+                                        </form>
+                                </td>
+                                <td class="go">
+                                    <button type="button"  onclick="ShowEdit({{count.value}})">Edit</button>
+                                </td>
+                            </tr>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
