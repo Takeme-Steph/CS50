@@ -220,8 +220,8 @@ def register():
             # add to database
             email = request.form.get("email")
             # check50 has an issue with blank emails, so placeholder
-            #if not email:
-                #email = "empty"
+            if not email:
+                email = "empty"
             password = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
             db.execute("INSERT INTO users (username, hash, email) VALUES (:username, :password, :email)", username=username.lower(), password=password, email=email)
             return redirect("/")
@@ -268,7 +268,7 @@ def sell():
             #update portfolio
             port = db.execute("SELECT * FROM portfolio WHERE userid=:ids AND symbol=:symbol", ids=session["user_id"], symbol=results["symbol"])
             if port[0]["amount"] == shares:
-                db.execute("DELETE FROM portfolio WHERE id=:ids AND symbol=:symbol", balance=balance, ids=session["user_id"],symbol=symbol)
+                db.execute("DELETE FROM portfolio WHERE userid=:ids AND symbol=:symbol", ids=session["user_id"],symbol=symbol)
             else:
                 ntotal = port[0]["amount"]-shares
                 db.execute("UPDATE portfolio SET amount=:ntotal WHERE userid=:ids AND symbol=:symbol", ntotal=ntotal, ids=session["user_id"], symbol=results["symbol"])
