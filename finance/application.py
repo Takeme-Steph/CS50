@@ -226,7 +226,7 @@ def register():
                 email = "empty"
             password = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
             db.execute("INSERT INTO users (username, hash, email) VALUES (:username, :password, :email)", username=username.lower(), password=password, email=email)
-            return redirect("/")
+            return redirect("/login")
         else:
             return apology("username already exists", 400)
 
