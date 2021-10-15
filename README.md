@@ -6,3 +6,6 @@ My problem sets and projects from taking the cs50 classes.
 
 # Lab9 - 
   it's a birthday app, you can add, edit and delete birthdays. It's made with python(Flask) and sqlite,html,css and javascript.
+
+# Pset6
+DNA - this app takes a sequence of DNA and a CSV file containing STR counts for a list of individuals as a command line argument, and then matches the STR repeats to determine whom the DNA (most likely) belongs to.
