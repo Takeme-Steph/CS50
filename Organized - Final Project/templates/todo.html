@@ -1,0 +1,204 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    TODOs
+{% endblock %}
+
+{% block main %}
+
+<!--  https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form -->
+
+{% set totalcost = namespace(value=0) %}
+{% for todo in todos %}
+	{% set totalcost.value = totalcost.value + todo.cost %}
+{%endfor%}
+
+<div>
+	<a href="/umbrella?event={{umbrella.eventsid}}" class="btn btn-info" style="float:left; background-color:#537fbe"><i class="material-icons"> arrow_circle_left</i><span>Umbrellas</span> </a>
+</div>
+<br> <br> <br>
+
+
+<div class="container-xl">
+	<div class="row">
+	<div class="table-responsive">
+		<div class="row">
+			<div class="budget">
+				<b>Budget</b>  <br>  {{umbrella.budget | usd}}
+			</div>
+			<div class="budget">
+				<b>Total Cost</b> <br> {{totalcost.value | usd}}
+			</div>
+			{% if (umbrella.budget -totalcost.value) < 0 %}
+			<div class="budget" style="background-color:red">
+				<b>Budget Balance</b> <br> {{(umbrella.budget -totalcost.value)| usd}}
+			</div>
+			{% else %}
+			<div class="budget" style="background-color:#6fed78; color:black">
+				<b>Budget Balance</b> <br> {{(umbrella.budget -totalcost.value) | usd}}
+			</div>
+			{% endif %}
+		</div>
+
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+					    <h2 class="header">{{umbrella.title}} <b>Todos</b></h2>
+					</div>
+					<div class="col-sm-6">
+						<a href="#addTodoModal" class="btn btn-info" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Todo</span></a>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Description</th>
+						<th>Assigned To</th>
+						<th>Due Date</th>
+						<th>Cost</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				    {% for todo in todos %}
+					<tr>
+						<td>{{todo.description}}</td>
+                        <td>{{todo.assigned_to}}</td>
+                        <td>{{todo.due_date}}</td>
+                        <td>{{todo.cost | usd}}</td>
+                        <td>{{todo.status}}</td>
+                        {% set totalcost.value = totalcost.value + todo.cost %}
+						<td><a href="#editTodoModal{{todo.PK}}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							<a href="#deleteTodoModal{{todo.PK}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+						</td>
+					</tr>
+
+					<!-- Edit TODO Modal -->
+					<div id="editTodoModal{{todo.PK}}" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<form action="/todo?umbrella={{umbrella.PK}}" method="post">
+									<div class="modal-header">
+										<h4 class="modal-title">Edit Todo</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label>Description</label>
+											<input name="description" placeholder="Description" type="text" class="form-control" value="{{todo.description}}" required>
+										</div>
+										<div class="form-group">
+											<label>Assigned to</label>
+											<input name="assigned_to" placeholder="Assigned_to" type="text" class="form-control" value="{{todo.assigned_to}}">
+										</div>
+										<div class="form-group">
+											<label>Due date</label>
+											<input class="form-control" name="due_date" placeholder="Due_date" type="datetime-local" value="{{todo.due_date|datetime_format}}">
+										</div>
+										<div class="form-group">
+											<label>Cost</label>
+											<input name="cost" placeholder="Cost" type="number" class="form-control" value="{{todo.cost}}">
+										</div>
+										<div class="form-group">
+											<label>Status</label>
+											<input name="status" placeholder="Status" type="text" class="form-control" value="{{todo.status}}">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+										<input type="submit" class="btn btn-success" value="Save">
+									</div>
+									<input autocomplete="off" autofocus class="form-control" name="event" value="edit" type="hidden">
+									<input autocomplete="off" autofocus class="form-control" name="PK" value="{{todo.PK}}" type="hidden">
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<!-- Delete Modal HTML -->
+					<div id="deleteTodoModal{{todo.PK}}" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<form action="/todo?umbrella={{umbrella.PK}}" method="post">
+									<div class="modal-header">
+										<h4 class="modal-title">Delete Todo</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+										<p>Are you sure you want to delete this Todo?</p>
+										<p class="text-warning"><small>This action cannot be undone.</small></p>
+									</div>
+									<div class="modal-footer">
+										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+										<input type="submit" class="btn btn-danger" value="Delete">
+									</div>
+									<input autocomplete="off" autofocus class="form-control" name="event" value="delete" type="hidden">
+									<input autocomplete="off" autofocus class="form-control" name="PK" value="{{todo.PK}}" type="hidden">
+								</form>
+							</div>
+						</div>
+					</div>
+
+					{%endfor%}
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+</div>
+
+<!-- Add TODO Modal -->
+<div id="addTodoModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/todo?umbrella={{umbrella.PK}}" method="post">
+				<div class="modal-header">
+					<h4 class="modal-title">Add Todo</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Description</label>
+						<input name="description" placeholder="Description" type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Assigned to</label>
+						<input name="assigned_to" placeholder="Assigned_to" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Due date</label>
+						<input class="form-control" name="due_date" placeholder="Due_date" type="datetime-local">
+					</div>
+					<div class="form-group">
+						<label>Cost</label>
+						<input name="cost" placeholder="Cost" type="number" class="form-control" value="0">
+					</div>
+					<div class="form-group">
+						<label>Status</label>
+						<input name="status" placeholder="Status" type="text" class="form-control">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-success" value="Add">
+				</div>
+				<input autocomplete="off" autofocus class="form-control" name="event" value="add" type="hidden">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

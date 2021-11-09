@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    UMBRELLAS
+{% endblock %}
+
+{% block main %}
+
+{% set totalcost = namespace(value=0) %}
+{% for umbrella in umbrellas %}
+	{% set totalcost.value = totalcost.value + umbrella.budget %}
+{%endfor%}
+
+
+<div>
+	<a href="/" class="btn btn-info" style="float:left; background-color:#537fbe"><i class="material-icons"> arrow_circle_left</i><span>Events</span> </a>
+</div>
+<br> <br> <br>
+
+<div class="X">
+
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="header">
+                    <h2>{{event.title}} Umbrellas</h2>
+                </div>
+                <br> <br>
+                <br>
+                <div class="row">
+					<div class="budget">
+						<b>Budget</b>  <br>  {{event.budget | usd}}
+					</div>
+					<div class="budget">
+						<b>Total Cost</b> <br> {{totalcost.value | usd}}
+					</div>
+					{% if (event.budget -totalcost.value) < 0 %}
+					<div class="budget" style="background-color:red">
+						<b>Budget Balance</b> <br> {{(event.budget -totalcost.value)| usd}}
+					</div>
+					{% else %}
+					<div class="budget" style="background-color:#6fed78; color:black">
+						<b>Budget Balance</b> <br> {{(event.budget -totalcost.value) | usd}}
+					</div>
+					{% endif %}
+				</div>
+            </div>
+            <div style="float:right">
+        		<a href="#addUmbrellaModal" class="btn btn-info" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Umbrella</span></a>
+        	</div>
+        </div>
+    </div>
+
+    <ul class="SG" style="list-style-type: none">
+        {% for umbrella in umbrellas %}
+        <li class="sgLi">
+            <div class="box">
+                <div>
+                    <a href="/todo?umbrella={{umbrella.PK}}">
+                        <div class="topheaders">
+                            <h4>{{umbrella.title}}</h4>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <p>{{umbrella.description}}</p>
+                </div>
+                <div class="boxed">
+                    <b>Budget</b>   {{umbrella.budget | usd}}
+
+                </div>
+                <div style="float:left">
+                    <a href="#editUmbrellaModal{{umbrella.PK}}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+    				<a href="#deleteUmbrellaModal{{umbrella.PK}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+    			</div>
+            </div>
+
+            <!-- Delete Modal HTML -->
+			<div id="deleteUmbrellaModal{{umbrella.PK}}" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form action="/umbrella?event={{event.PK}}" method="post">
+							<div class="modal-header">
+								<h4 class="modal-title">Delete Umbrella</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							</div>
+							<div class="modal-body">
+								<p>Are you sure you want to delete this Umbrella?</p>
+								<p class="text-warning"><small>This action cannot be undone.</small></p>
+							</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+								<input type="submit" class="btn btn-danger" value="Delete">
+							</div>
+							<input autocomplete="off" autofocus class="form-control" name="event" value="delete" type="hidden">
+							<input autocomplete="off" autofocus class="form-control" name="PK" value="{{umbrella.PK}}" type="hidden">
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Edit Umbrella Modal -->
+			<div id="editUmbrellaModal{{umbrella.PK}}" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form action="/umbrella?event={{event.PK}}" method="post">
+							<div class="modal-header">
+								<h4 class="modal-title">Edit Umbrella</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							</div>
+							<div class="modal-body">
+							    <div class="form-group">
+									<label>Title</label>
+									<input name="title" placeholder="Title" type="text" class="form-control" value="{{umbrella.title}}" required>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<textarea name="description" placeholder="Description" type="text" class="form-control">{{umbrella.description}}</textarea>
+								</div>
+								<div class="form-group">
+									<label>Budget</label>
+									<input name="budget" placeholder="Budget" type="number" class="form-control" value="{{umbrella.budget}}">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+								<input type="submit" class="btn btn-success" value="Save">
+							</div>
+							<input autocomplete="off" autofocus class="form-control" name="event" value="edit" type="hidden">
+							<input autocomplete="off" autofocus class="form-control" name="PK" value="{{umbrella.PK}}" type="hidden">
+						</form>
+					</div>
+				</div>
+			</div>
+        </li>
+        {%endfor%}
+    </ul>
+</div>
+
+
+
+<!-- Add Umbrella Modal -->
+<div id="addUmbrellaModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/umbrella?event={{event.PK}}" method="post">
+				<div class="modal-header">
+					<h4 class="modal-title">Add Umbrella</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Title</label>
+						<input name="title" placeholder="Title" type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<textarea name="description" placeholder="Description" type="text" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
+						<label>Budget</label>
+						<input name="budget" placeholder="Budget" type="number" class="form-control" value="0">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-success" value="Add">
+				</div>
+				<input autocomplete="off" autofocus class="form-control" name="event" value="add" type="hidden">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
