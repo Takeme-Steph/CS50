@@ -1,5 +1,7 @@
 My problem sets and projects from taking the cs50 classes.
 
+Testing Stuf out
+
 ## Organized - Final Project
   Organized is a planning & budgeting web app. It has 3 levels **Event** > **Umbrellas** > **Todos**. You can use it to make todo lists, plan budgeted events etc.
   It lets you know when you are under or overbudget, you can also assign tasks and todo's to other people *(this is function is still in a very basic form and is yet to be           properly expended upon)*
