@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link href="styles.css" rel="stylesheet">
+        <title>My Webpage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script>
+            function me()
+            {
+                var txt = ["I am a huge foodie","I love Anime (Sub only)","Heavy in the introvert and couch potato","I love red wine"];
+                var n = (Math.floor(Math.random() * (4- 1) ) + 1) - 1;
+                document.getElementById("mealert").innerHTML = txt[n];
+                document.getElementById("mealert").style.display = "block";
+                }
+        </script>
+    </head>
+    <body>
+        <ul class="top">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="certificates.html">Certificates</a></li>
+          <li><a href="about_me.html">About Me</a></li>
+        </ul>
+       <img src="cat.jpg" style="width:100%;max-height:3456px;" alt="Picture of a cat">
+       <hr>
+       <h1>Stephanie Omobolanle Takeme</h1>
+       <hr>
+       <section>
+       <h2><b>Portfolio</b></h2>
+       <hr>
+       <p>Welcome to my portfolio, it was meant to be as simple assignment for my cs50 class but i thought might as well make a portfolio while i'm at it
+       <br>
+       It is incomplete but you can see my progress in my career, skills, projects and some other things about me.
+       </p>
+       </section>
+       <div class="alert alert-warning alert-dismissible fade show" role="alert" id="mealert" style="text-align:center;">
+           A little something about me
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+         </button>
+         </div>
+         <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="me()">Click Me</button>
+       <div>
+       <p style="text-align:center;">
+       		<a href="resume.html" title="Click to see my resume">See my Resume</a>
+       		<a href="about_me.html" title="Click to see my hobbies and stuff">Know more about me</a>
+       		<a href="certificates.html" title="Click to see my certificates and progress">See my certificates</a>
+       </p>
+       </div>
+       <section>
+       <hr/>
+       <h2><b>Areas Of Interest</b></h2>
+
+        <dl>
+          <dt>Data Analytics</dt>
+              <dd>I have almost 3 years proffesional work experience as a business/data anlyst, transforming big datasets into meaning business insights</dd>
+          <dt>Cloud Computing</dt>
+              <dd>I use Microsoft Services for most of my work and have gotten very comfortable with Azure, AWS and Google cloud services for processing,
+              storing and transforming data</dd>
+          <dt>AI, ML and Big Data</dt>
+              <dd>I am deeply interested in AI and ML as i work big data and i would love to move form modeling the to making predictions with it</dd>
+        </dl>
+       </section>
+       <footer>
+         <div>
+             Rough work in progress, will be updated as i learn more. Thank you.
+         </div>
+       </footer>
+    </body>
+</html>

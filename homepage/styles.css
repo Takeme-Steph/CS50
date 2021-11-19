@@ -1,0 +1,107 @@
+a {
+    margin: 50px;
+    background-color: indigo;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size:1.3vw
+}
+
+ul.top {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#333333;
+}
+
+.top li {
+  float: left;
+
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #111111;
+}
+.cv {
+  background-color: #363848;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.cv p {
+  font-size:1.3vw;
+  padding: 15px 25px;
+}
+.cv hr{
+  color: black;
+}
+
+.float {
+  float:right;
+  width: 20%;
+  text-align: right;
+}
+ul, dl, div{
+  font-size:1.2vw;
+}
+
+h1 {
+  font-size:3vw;
+  text-align:center;
+}
+
+h2 {
+  font-size:2vw;
+  text-align:center
+}
+h3 {
+  font-size:2vw;
+}
+h4 {
+  font-size:1.5vw;
+}
+
+p {
+  font-size:1.5vw;
+  padding: 15px 25px;
+}
+
+@media screen and (max-width:620px) {
+  /* For mobile phones: */
+  nav, .top {
+    float:left;
+    width:100%;
+
+  }
+}
+
+dt {
+  padding-left: 15px;
+  padding-right: 15px
+}
+
+dd {
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-right: 15px
+}
+
+footer {
+  background-color:#333333;
+  text-align:center;
+  padding:10px;
+  margin-top:7px;
+  color: white;
+}
