@@ -24,15 +24,15 @@ Design is not my strong point so i borrowed some design elements from the intern
 ##### Security:
 Passwords are hashed and tried my best to make sure routes are accessed & data reterieved in a way that doesn't expose sensitive information through the url or any other method.
 ##### Possible improvements & New Features List:
--Improving the **assigned to** feature so that a user can see other todo lists that they do not own but are assigned a task in it.
--A dynamic **assigned to** list, where the assigner can pick from a list of all known contacts or people on thier organisation account and assign a task to them
--Mail alerts for certain actions
--Allow image & document upload
--Allow contributors for events, umbrellas & todos
--Allow the option of signing up for a company account or personal account with specialized User experienxe and design
--Permissions for contributors (read/write)
--A wallet system where one cam fund an event wwith real money and people assingned to the tasks can withraw the money budgeted for it to pay bills
--Special Event templates e.g for household bills with added autopayment functionality where supported 3rd parties are paid with money in users wallet when the bills are due
--Analytics Dashboard
--Abitlity to sort events, umbrellas and todos
--Warning for overdue tasks
+- Improving the **assigned to** feature so that a user can see other todo lists that they do not own but are assigned a task in it.
+- A dynamic **assigned to** list, where the assigner can pick from a list of all known contacts or people on thier organisation account and assign a task to them
+- Mail alerts for certain actions
+- Allow image & document upload
+- Allow contributors for events, umbrellas & todos
+- Allow the option of signing up for a company account or personal account with specialized User experienxe and design
+- Permissions for contributors (read/write)
+- A wallet system where one cam fund an event wwith real money and people assingned to the tasks can withraw the money budgeted for it to pay bills
+- Special Event templates e.g for household bills with added autopayment functionality where supported 3rd parties are paid with money in users wallet when the bills are due
+- Analytics Dashboard
+- Abitlity to sort events, umbrellas and todos
+- Warning for overdue tasks
