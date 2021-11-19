@@ -94,4 +94,5 @@ This was built in C
     - Kevin Bacon himself should not be included in the resulting list.
 #### **Houses** - I honestly can't really remember what this program was meant to do, but i beleive *import.py* is meant to import a list of students names, houses and date of birth from a csv file into a central database (students.db), and *roaster.py* is meant to prompt the user for a house name and print out all students in the central database that belong to that house via the command line. This was built in python.
 
-## **Homepage** - A basic webpage using HTML,CSS and Javascript, and some elements from bootstrap.
+## **Homepage** 
+A basic webpage using HTML,CSS and Javascript, and some elements from bootstrap.
