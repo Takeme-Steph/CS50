@@ -1,6 +1,4 @@
-My problem sets and projects from taking the cs50 classes.
-
-Testing Stuf out
+Testing Stuff out
 
 ## Organized - Final Project
   Organized is a planning & budgeting web app. It has 3 levels **Event** > **Umbrellas** > **Todos**. You can use it to make todo lists, plan budgeted events etc.
