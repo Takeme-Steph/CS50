@@ -14,14 +14,14 @@
             <th>Value</th>
         </tr>
         {% set count = namespace(value=0) %}
-        {% for i in range(j) %}
+        {% for p in portfolio %}
         <tr>
-            <td>{{portfolio[i]["symbol"]}}</td>
-            <td>{{portfolio[i]["stock"]}}</td>
-            <td>{{portfolio[i]["amount"]}}</td>
-            <td>{{usd(portfolio[i]["price"])}}</td>
-            <td>{{usd(portfolio[i]["price"]*portfolio[i]["amount"])}}</td>
-            {% set count.value = count.value + (portfolio[i]["price"]*portfolio[i]["amount"]) %}
+            <td>{{p.symbol}}</td>
+            <td>{{p.stock}}</td>
+            <td>{{p.amount}}</td>
+            <td>{{usd(p.price)}}</td>
+            <td>{{usd(p.price*p.amount)}}</td>
+            {% set count.value = count.value + (p.price*p.amount) %}
         </tr>
         {%endfor%}
         <tr>
@@ -35,8 +35,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{usd(user[0]["cash"])}}</td>
-            <td>{{usd(user[0]["cash"]+ count.value)}}</td>
+            <td>{{usd(user.cash)}}</td>
+            <td>{{usd(user.cash+ count.value)}}</td>
         </tr>
     </table>
 {% endblock %}

@@ -39,9 +39,9 @@
               country: "NG",
               payment_options: " ",
               customer: {
-                email: '{{user[0]["email"]}}',
+                email: '{{user.email}}',
                 phone_number: "000000",
-                name: '{{user[0]["username"]}}',
+                name: '{{user.username}}',
               },
 
               callback:function (data) { // specified callback function
@@ -49,7 +49,7 @@
                 $.ajax({
                     type: "POST",
                     contentType:'application/json',
-                    url: "https://ide-aa4eafb22461487aae1a6ad345c6a23a-8080.cs50.ws/topup",
+                    url: "{{callback}}/topup",
                     data: JSON.stringify(data),
                     });
               },
